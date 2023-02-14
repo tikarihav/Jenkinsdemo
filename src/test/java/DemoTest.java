@@ -22,7 +22,7 @@ public class DemoTest {
              page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("D:\\playwright.png")));
              assertThat(page).hasTitle(Pattern.compile("dnb-stg - Sign In"));
          }
-        //assertEquals(6, sum);
+        
      }
      
      @Test
@@ -32,9 +32,15 @@ public class DemoTest {
              Page page = browser.newPage();
              page.navigate("http://stg.sso.dnb.com");
              page.locator("#idp-discovery-username").fill("fs18regression@dnbiemailtest.org");
+             page.locator("#idp-discovery-submit").click();
+             page.locator("#okta-signin-password").fill("Welcome@123");
+             page.locator("#okta-signin-submit").click();
+             page.waitForSelector("//*[@alt ='D&B Finance Analytics logo']");
              page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("D:\\playwright1.png")));
-             assertThat(page).hasTitle(Pattern.compile("Dun and Bradstreet"));
+             assertThat(page).hasTitle(Pattern.compile("My Apps Dashboard | dnb-stg"));
          }
-        //assertEquals(6, sum);
+        
      }
+     
+     
 }
